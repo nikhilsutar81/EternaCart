@@ -6,6 +6,15 @@ import axios from 'axios';
 
 const Orders = () => {
   const {backendUrl, token, currency} = useContext(ShopContext);
+  let userId = null;
+  if (token) {
+    try {
+      const decoded = require('jwt-decode')(token);
+      userId = decoded.id;
+    } catch (e) {
+      userId = null;
+    }
+  }
 
   const [orderData, setOrderData] = useState([]);
 
@@ -14,7 +23,7 @@ const Orders = () => {
       if(!token){
         return null
       }
-      const response = await axios.post(backendUrl + '/api/order/userOrders', {}, {headers: {token}})
+  const response = await axios.post(backendUrl + '/api/order/userOrders', { userId }, {headers: {token}})
       if(response.data.success){
         let allOrderItems = []
         response.data.orders.map((order)=>{
