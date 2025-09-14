@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
+import { jwtDecode } from 'jwt-decode';
 import { ShopContext } from '../context/ShopContext';
 import Title from '../components/Title';
 import axios from 'axios';
@@ -9,7 +10,7 @@ const Orders = () => {
   let userId = null;
   if (token) {
     try {
-      const decoded = require('jwt-decode')(token);
+      const decoded = jwtDecode(token);
       userId = decoded.id;
     } catch (e) {
       userId = null;
