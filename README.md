@@ -43,11 +43,11 @@
 
 # Screenshots
 
-# LeafyLane client side
-<img width="1879" height="889" alt="Screenshot 2025-09-21 130551" src="https://github.com/user-attachments/assets/6458c295-5bfc-484e-9fae-b27da95aedba" />
+# EternaCart client side
+<img width="1901" height="914" alt="Screenshot 2025-09-24 175507" src="https://github.com/user-attachments/assets/b917f0b1-af64-408d-918b-83d759b17b5d" />
 
-# LeafyLane Seller Panel:
-<img width="1875" height="912" alt="Screenshot 2025-09-21 132356" src="https://github.com/user-attachments/assets/a2523a17-4aaa-463e-8529-a13f82d0c1eb" />
+# EternaCart Admin Panel:
+<img width="1881" height="920" alt="Screenshot 2025-09-24 175640" src="https://github.com/user-attachments/assets/06ad12c2-9511-4080-858e-74e64f039d17" />
 
 ---
 
