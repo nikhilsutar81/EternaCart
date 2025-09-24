@@ -88,9 +88,9 @@
 
 # Credentials:
 
-- **SELLER PANEL**  
-**Email:** leafylane@gmail.com  
-**Password:** leafylane@123
+- **ADMIN PANEL**  
+**Email:** eternacart@gmail.com  
+**Password:** admin123
 
 ---
 
