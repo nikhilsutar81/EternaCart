@@ -1,37 +1,65 @@
-# E-Commerce Website (MERN Stack)
+<div align="center">
+  <h1><img src="https://leafylane-client.vercel.app/android-chrome-512x512.png" width="20" height="20" alt=":EternaCart Favicon">EternaCart</h1>
+  <p>
+    This project is a fully functional e-commerce website built using the MERN (MongoDB, Express, React, Node.js) stack. It features user authentication, product management, a shopping cart, order placement, and payment gateway integration. The admin dashboard allows for efficient store management, including order tracking and product uploads.
+  </p>
+</div>
 
-## Description
-This project is a fully functional e-commerce website built using the MERN (MongoDB, Express, React, Node.js) stack. It features user authentication, product management, a shopping cart, order placement, and payment gateway integration. The admin dashboard allows for efficient store management, including order tracking and product uploads.
+---
 
-## Features
-- **Frontend**: Built with Vite React, including pages for home, collections, product details, cart, orders, login, about, and contact.
-- **Backend**: Node.js and Express handle APIs, user authentication, and database management.
-- **Authentication**: Secure user and admin authentication using JWT.
-- **Product Management**: Upload, edit, and delete products via an admin dashboard.
-- **Cart & Order Management**: Add products to the cart, place orders, and track them in the admin panel.
-- **Payment Integration**: Supports Stripe and Razorpay for secure transactions.
-- **Image Uploads**: Uses Cloudinary and Multer for efficient image storage and handling.
-- **Deployment**: Fully deployed on Vercel for easy access.
+# Table of Contents
 
-## Project Structure
-1. **Frontend**: Vite React setup, routing, and UI components.
-2. **Backend**: API development with Express and MongoDB.
-3. **Authentication**: User registration and admin verification.
-4. **Product Features**: Uploading and displaying products.
-5. **Cart & Orders**: Managing user purchases and tracking orders.
-6. **Admin Dashboard**: Overview and control over website operations.
-7. **Payments**: Secure integration with Stripe and Razorpay.
-8. **Image Uploads**: Implemented using Cloudinary and Multer.
-9. **Deployment**: Final hosting on Vercel.
+- Features
+- Tech Stack
+- Screenshots
+- Installation
+- Credentials
+- Deployment
 
-## Installation
+---
+
+# Features
+
+- User authentication (Email/Password or Google OAuth via Passport.js)
+- Profile update support
+- Browse and filter products by category
+- Product search functionality
+- Add/remove items from the cart
+- Two payment methods: **Stripe** (online) or **Cash on Delivery**
+- Admin dashboard for order and product management (WIP/future scope)
+- Image upload with **Cloudinary**
+
+---
+
+# Tech Stack
+
+- **Frontend**: React, Redux, React Router
+- **Backend**: Node.js, Express, MongoDB
+- **Authentication**: JWT
+- **Image Uploads**: Cloudinary, Multer
+- **Deployment**: Vercel
+
+---
+
+# Screenshots
+
+# LeafyLane client side
+<img width="1879" height="889" alt="Screenshot 2025-09-21 130551" src="https://github.com/user-attachments/assets/6458c295-5bfc-484e-9fae-b27da95aedba" />
+
+# LeafyLane Seller Panel:
+<img width="1875" height="912" alt="Screenshot 2025-09-21 132356" src="https://github.com/user-attachments/assets/a2523a17-4aaa-463e-8529-a13f82d0c1eb" />
+
+---
+
+# Installation
+
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/mern-ecommerce.git
+   git clone https://github.com/nikhilsutar81/EternaCart.git
    ```
 2. Navigate to the project directory:
    ```bash
-   cd mern-ecommerce
+   cd eternacart
    ```
 3. Install dependencies for both frontend and backend:
    ```bash
@@ -55,25 +83,19 @@ This project is a fully functional e-commerce website built using the MERN (Mong
    cd admin
    npm run start
    ```
-5. Open `http://localhost:5174/` in your browser.
 
-## Technologies Used
-- **Frontend**: React, Redux, React Router
-- **Backend**: Node.js, Express, MongoDB
-- **Authentication**: JWT
-- **Payment**: Stripe, Razorpay
-- **Image Uploads**: Cloudinary, Multer
-- **Deployment**: Vercel
+---
 
-## Deployment
-To deploy the project on Vercel:
+# Credentials:
+
+- **SELLER PANEL**  
+**Email:** leafylane@gmail.com  
+**Password:** leafylane@123
+
+---
+
+# Deployment
+Deploy the project on Vercel:
 1. Push the code to GitHub.
 2. Connect the repository to Vercel.
-3. Deploy both the frontend and backend separately.
-
-## Contributors
-- **Divanshi Jain** - [GitHub Profile](https://github.com/DivanshiJain2005)
-
-## License
-This project is licensed under the MIT License.
-
+3. Deploy all the 3 frontend, backend and admin separately.
