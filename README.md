@@ -13,7 +13,6 @@
 - Tech Stack
 - Screenshots
 - Installation
-- Credentials
 - Deployment
 
 ---
@@ -83,14 +82,6 @@
    cd admin
    npm run start
    ```
-
----
-
-# Credentials:
-
-- **ADMIN PANEL**  
-**Email:** eternacart@gmail.com  
-**Password:** admin123
 
 ---
 
