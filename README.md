@@ -1,32 +1,43 @@
 <div align="center">
   <h1><img src="https://eternacart-client.vercel.app/android-chrome-512x512.png" width="20" height="20" alt=":EternaCart Favicon">EternaCart</h1>
-  <p>
-    This project is a fully functional e-commerce website built using the MERN (MongoDB, Express, React, Node.js) stack. It features user authentication, product management, a shopping cart, order placement, and payment gateway integration. The admin dashboard allows for efficient store management, including order tracking and product uploads.
-  </p>
+  <p> A <b>Full-Stack E-Commerce Platform</b> built with the <b>MERN Stack</b>, featuring user authentication, product catalog, cart management, secure payments, and an admin dashboard for order and product management. </p>
 </div>
 
 ---
 
-# Table of Contents
-
-- Features
-- Tech Stack
-- Screenshots
-- Installation
-- Deployment
+# 📖 Table of Contents
+- [Description](#-description)
+- [Features](#-features)
+- [Tech Stack](#-tech-stack)
+- [Screenshots](#-screenshots)
+- [Getting Started](#-getting-started)
+- [Environment Variables](#-environment-variables)
+- [File Structure](#-file-structure)
+- [Deployment](#-deployment)
+- [Disclaimer](#-disclaimer)
 
 ---
 
-# Features
+# 📝 Description
 
-- User authentication (Email/Password or Google OAuth via Passport.js)
-- Profile update support
-- Browse and filter products by category
-- Product search functionality
-- Add/remove items from the cart
-- Two payment methods: **Stripe** (online) or **Cash on Delivery**
-- Admin dashboard for order and product management (WIP/future scope)
-- Image upload with **Cloudinary**
+EternaCart is a **fully functional e-commerce solution** built for learning and portfolio purposes. It demonstrates **real-world e-commerce workflows** including user registration, authentication, product catalog, shopping cart, order management, secure checkout, and admin control.
+
+This project highlights:
+- End-to-end **MERN stack development**
+- **Role-based authentication (Admin & Users)**
+- **Cloud-based storage** for images
+- **Admin dashboard** for managing orders and inventory
+
+---
+
+# ✨ Features
+- **User Authentication:** Email/Password & Google OAuth with JWT
+- **Profile Management:** Update user details and saved addresses
+- **Product Catalog:** Browse, filter by category, and search products
+- **Cart & Checkout:** Add/remove items and place orders
+- **Payment Methods:** Cash on Delivery
+- **Admin Dashboard:** Manage products, track orders, oversee sales (WIP/future scope)
+- **Cloudinary Integration:** Secure product image uploads
 
 ---
 
@@ -50,43 +61,116 @@
 
 ---
 
-# Installation
+# 🚀 Getting Started
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/nikhilsutar81/EternaCart.git
-   ```
-2. Navigate to the project directory:
-   ```bash
-   cd eternacart
-   ```
-3. Install dependencies for both frontend and backend:
-   ```bash
-   cd frontend
-   npm install
-   cd ../backend
-   npm install
-   cd ../admin
-   npm install
-   ```
-4. Start the development servers:
-   ```bash
-   cd frontend
-   npm run dev
-   ```
-   ```bash
-   cd backend
-   npm run dev
-   ```
-   ```bash
-   cd admin
-   npm run start
-   ```
+### 1️⃣ Clone the repository
+```bash
+git clone https://github.com/nikhilsutar81/EternaCart.git
+cd eternacart
+```
+
+### 2️⃣ Install dependencies
+```
+Frontend:
+cd client
+npm install
+
+Backend:
+cd ../server
+npm install
+
+Admin:
+cd ../admin
+npm install
+```
+
+### 3️⃣ Configure environment variables
+```
+Set up .env files in server, client, and admin (see Environment Variables).
+```
+
+### 4️⃣ Run development servers
+```
+Backend:
+cd server
+npm run dev
+
+Frontend:
+cd client
+npm run dev
+
+Admin:
+cd admin
+npm run dev
+```
 
 ---
 
-# Deployment
+# 🔐 Environment Variables
+**Backend .env**
+```
+MONGODB_URI=your_mongodb_connection_string
+CLOUDINARY_API_KEY=your_cloudinary_api_key
+CLOUDINARY_SECRET_KEY=your_cloudinary_secret
+CLOUDINARY_NAME=your_cloudinary_name
+ADMIN_EMAIL=your_admin_email
+ADMIN_PASSWORD=your_admin_password
+```
+
+**Frontend .env**
+```
+VITE_BACKEND_URL=http://localhost:5000
+```
+
+**Admin .env**
+```
+VITE_BACKEND_URL=http://localhost:5000
+```
+
+---
+
+# 📂 File Structure
+```
+eternacart/
+├── client/                 # Customer-facing React app
+│   ├── src/
+│   │   ├── components/     # UI components
+│   │   ├── pages/          # Page-level components
+│   │   ├── redux/          # State management
+│   │   └── App.jsx
+│   └── package.json
+│
+├── admin/                  # Admin dashboard
+│   ├── src/
+│   │   ├── components/     # Dashboard UI
+│   │   ├── pages/          # Admin pages
+│   │   └── App.jsx
+│   └── package.json
+│
+├── server/                 # Express backend
+│   ├── config/             # DB & Cloudinary config
+│   ├── controllers/        # Business logic
+│   ├── models/             # Mongoose schemas
+│   ├── routes/             # API routes
+│   ├── middleware/         # Auth & error handling
+│   └── server.js           # Entry point
+│
+├── .gitignore
+└── README.md
+```
+
+---
+
+# ☁️ Deployment
 Deploy the project on Vercel:
 1. Push the code to GitHub.
 2. Connect the repository to Vercel.
 3. Deploy all the 3 frontend, backend and admin separately.
+
+---
+
+# ⚠️ Disclaimer
+
+This project is created for educational and portfolio purposes.
+All third-party assets (logos, images, etc.) are the property of their respective owners.
+No copyright infringement is intended.
