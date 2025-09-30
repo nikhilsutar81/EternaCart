@@ -10,7 +10,7 @@ const Collection = () => {
   const [showFilter, setShowFilter] = useState(false);
   const [filterProducts, setFilterProducts] = useState([]);
   const [category, setCategory] = useState([]);
-  const [subcategory, setSubCategory] = useState([]);
+  const [subCategory, setSubCategory] = useState([]);
   const [sortType, setSortType] = useState('relevant');
 
   const toggleCategory = (e) => {
@@ -39,8 +39,8 @@ const Collection = () => {
     if(category.length > 0){
       productsCopy = productsCopy.filter(item => category.includes(item.category))
     }
-    if(subcategory.length > 0){
-      productsCopy = productsCopy.filter(item => subcategory.includes(item.subcategory))
+    if(subCategory.length > 0){
+      productsCopy = productsCopy.filter(item => subCategory.includes(item.subCategory))
     }
     setFilterProducts(productsCopy)
   }
@@ -61,10 +61,10 @@ const Collection = () => {
   }
   useEffect(()=>{
     applyFilter();
-  }, [category, subcategory, search, showSearch, products])
+  }, [category, subCategory, search, showSearch, products])
   useEffect(()=>{
     sortProduct();
-  }, sortType)
+  }, [sortType])
   return (
     <div className='flex flex-col sm:flex-row gap-1 sm:gap-10 pt-10 border-t'>
       {/*Filter options */}
