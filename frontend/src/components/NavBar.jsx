@@ -4,8 +4,9 @@ import { Link, NavLink } from 'react-router-dom';
 import { ShopContext } from '../context/ShopContext';
 
 const NavBar = () => {
-    const [visible, setVisible] = useState(false);
-    const {setShowSearch, getCartCount, navigate, token, setToken, setCartItems} = useContext(ShopContext);
+  const [visible, setVisible] = useState(false);
+  const [profileOpen, setProfileOpen] = useState(false);
+  const {setShowSearch, getCartCount, navigate, token, setToken, setCartItems} = useContext(ShopContext);
     const logout = () => {
       navigate('/login')
       localStorage.removeItem('token')
@@ -49,15 +50,17 @@ const NavBar = () => {
       <div className="flex items-center gap-6">
   <img onClick={() => { setShowSearch(true); navigate('/collection'); }} src={assets.search_icon} className="w-5 cursor-pointer" alt="Search" />
 
-        <div className="group relative">
-          <img onClick={() => token ? null : navigate('/login')} className="w-5 cursor-pointer" src={assets.profile_icon} alt="Profile" />
-          {token && <div className="hidden group-hover:block absolute right-0 pt-4 bg-white shadow-md rounded">
-            <div className="flex flex-col gap-2 w-36 py-3 px-5 bg-slate-100 text-gray-500 rounded">
-              <p className="cursor-pointer hover:text-black">My Profile</p>
-              <p onClick={()=> navigate('/orders')} className="cursor-pointer hover:text-black">Orders</p>
-              <p onClick={logout} className="cursor-pointer hover:text-black">Logout</p>
+        <div className="relative">
+          <img onClick={() => token ? setProfileOpen(p=>!p) : navigate('/login')} className="w-5 cursor-pointer" src={assets.profile_icon} alt="Profile" />
+          {token && profileOpen && (
+            <div className="absolute right-0 pt-4 bg-white shadow-md rounded">
+              <div className="flex flex-col gap-2 w-40 py-3 px-4 bg-slate-100 text-gray-500 rounded">
+                <p onClick={()=>{ setProfileOpen(false); navigate('/profile') }} className="cursor-pointer hover:text-black">My Profile</p>
+                <p onClick={()=>{ setProfileOpen(false); navigate('/orders') }} className="cursor-pointer hover:text-black">Orders</p>
+                <p onClick={()=>{ setProfileOpen(false); logout() }} className="cursor-pointer hover:text-black">Logout</p>
+              </div>
             </div>
-          </div>}
+          )}
         </div>
 
         <Link to="/cart" className="relative">
