@@ -81,4 +81,29 @@ const adminLogin = async (req, res) => {
     }
 }
 
-export { loginUser, registerUser, adminLogin };
+// Get current user profile
+const getProfile = async (req, res) => {
+    try {
+        const { userId } = req.body;
+        const user = await userModel.findById(userId).select('-password');
+        if (!user) return res.json({ success: false, message: 'User not found' });
+        res.json({ success: true, user });
+    } catch (error) {
+        console.log(error);
+        res.json({ success: false, message: error.message });
+    }
+}
+
+// Update user profile
+const updateProfile = async (req, res) => {
+    try {
+        const { userId, name, phone, address, photo } = req.body;
+    const updated = await userModel.findByIdAndUpdate(userId, { name, phone, address, photo }, { new: true }).select('-password');
+        res.json({ success: true, user: updated });
+    } catch (error) {
+        console.log(error);
+        res.json({ success: false, message: error.message });
+    }
+}
+
+export { loginUser, registerUser, adminLogin, getProfile, updateProfile };
