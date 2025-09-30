@@ -4,10 +4,9 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 
 const Profile = () => {
-  const { backendUrl, token } = useContext(ShopContext);
+  const { backendUrl, token, setToken } = useContext(ShopContext);
   const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({ name: '', phone: '', address: {}, photo: '' });
-  const [imageFile, setImageFile] = useState(null);
 
   const fetchProfile = async () => {
     try {
@@ -35,29 +34,18 @@ const Profile = () => {
     }
   };
 
-  const onFileChange = (e) => {
-    setImageFile(e.target.files[0]);
-  };
 
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
       setLoading(true);
-      let photoUrl = form.photo;
-      if (imageFile) {
-        const data = new FormData();
-        data.append('file', imageFile);
-        data.append('upload_preset', 'unsigned');
-        // If you have cloudinary upload endpoint in backend, call that instead. For now assume frontend can send file to /api/upload (not implemented)
-        const uploadResp = await axios.post(backendUrl + '/api/upload', data, { headers: { token } });
-        if (uploadResp.data.success) photoUrl = uploadResp.data.url;
-      }
-
-      const payload = { userId: '', name: form.name, phone: form.phone, address: form.address, photo: photoUrl };
+      const payload = { userId: '', name: form.name, phone: form.phone, address: form.address };
       // userId is injected by auth middleware on backend, so we send empty body but auth middleware will add userId
       const resp = await axios.post(backendUrl + '/api/user/profile/update', payload, { headers: { token } });
       if (resp.data.success) {
         toast.success('Profile updated');
+        // trigger a context refresh - set token from localStorage to itself
+        try { if (localStorage.getItem('token')) setToken(localStorage.getItem('token')) } catch(e){}
       } else {
         toast.error(resp.data.message || 'Failed to update');
       }
@@ -93,11 +81,7 @@ const Profile = () => {
           <input name='address.zipcode' value={form.address?.zipcode || ''} onChange={onChange} className='w-full border px-3 py-2' placeholder='Zipcode' />
           <input name='address.country' value={form.address?.country || ''} onChange={onChange} className='w-full border px-3 py-2' placeholder='Country' />
         </div>
-        <div className='mb-3 mt-3'>
-          <label className='block mb-1'>Photo</label>
-          <input type='file' onChange={onFileChange} />
-          {form.photo && <img src={form.photo} alt='profile' className='w-24 mt-2' />}
-        </div>
+        {/* photo removed - not required */}
         <button disabled={loading} className='bg-black text-white px-4 py-2 mt-3'>Save</button>
       </form>
     </div>

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import Title from '../components/Title';
 import CartTotal from '../components/CartTotal';
 import { assets } from '../assets/assets';
@@ -23,6 +23,37 @@ const PlaceOrder = () => {
     country: '',
     phone: ''
   });
+
+  // fetch user profile and prefill address/name/email/phone if available
+  useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        if (!token) return;
+        const resp = await axios.post(`${backendUrl}/api/user/profile`, {}, { headers: { token } });
+        if (resp.data.success && resp.data.user) {
+          const user = resp.data.user;
+          const nameParts = (user.name || '').split(' ');
+          const first = nameParts.shift() || '';
+          const last = nameParts.join(' ') || '';
+          setFormData((f) => ({
+            ...f,
+            firstName: first,
+            lastName: last,
+            email: user.email || f.email,
+            phone: user.phone || f.phone,
+            street: user.address?.street || f.street,
+            city: user.address?.city || f.city,
+            state: user.address?.state || f.state,
+            zipcode: user.address?.zipcode || f.zipcode,
+            country: user.address?.country || f.country,
+          }));
+        }
+      } catch (error) {
+        console.error('Failed to fetch profile for prefill', error);
+      }
+    };
+    fetchProfile();
+  }, [token]);
 
   const onChangeHandler = (event) => {
     const { name, value } = event.target;
