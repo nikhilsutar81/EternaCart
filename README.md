@@ -1,6 +1,6 @@
 <div align="center">
   <h1><img src="https://eternacart-client.vercel.app/android-chrome-512x512.png" width="20" height="20" alt=":EternaCart Favicon">EternaCart</h1>
-  <p> A <b>Full-Stack E-Commerce Platform</b> built with the <b>MERN Stack</b>, featuring user authentication, product catalog, cart management, secure payments, and an admin dashboard for order and product management. </p>
+  <p> A <b>Full-Stack E-Commerce Platform</b> built with the <b>MERN Stack</b>, featuring user authentication, product catalog, cart management, COD and an admin dashboard for order and product management. </p>
 </div>
 
 ---
@@ -20,7 +20,7 @@
 
 # 📝 Description
 
-EternaCart is a **fully functional e-commerce solution** built for learning and portfolio purposes. It demonstrates **real-world e-commerce workflows** including user registration, authentication, product catalog, shopping cart, order management, secure checkout, and admin control.
+EternaCart is a **fully functional e-commerce solution** built for learning and portfolio purposes. It demonstrates **real-world e-commerce workflows** including user registration, authentication, product catalog, shopping cart, order management, cash on delivery, and admin control.
 
 This project highlights:
 - End-to-end **MERN stack development**
