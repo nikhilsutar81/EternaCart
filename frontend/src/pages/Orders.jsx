@@ -41,7 +41,8 @@ const Orders = () => {
       }
     }
     catch(error){
-
+      console.error('Failed to load orders:', error);
+      // optionally show a toast or user-facing message
     }
   }
 
@@ -55,7 +56,10 @@ const Orders = () => {
         <Title text1 = {'MY'} text2 = {'ORDERS'}/>
       </div>
       <div>
-        {orderData.slice(1,4).map((item, index)=>(
+        {orderData.length === 0 ? (
+          <p className='py-4 text-gray-500'>You have no orders yet.</p>
+        ) : (
+          orderData.map((item, index)=>(
           <div key={index} className='py-4 border-b text-gray-700 flex flex-col md:flex-row md:items-center md:justify-between gap-4'>
             <div className='flex items-start gap-6 text-sm'>
               <img className='w-16 sm:w-20' src={item.images[0]} alt="" />
@@ -78,7 +82,8 @@ const Orders = () => {
               <button onClick={loadOrderData} className='border px-4 py-2 text-sm font-medium rounded-sm'>Track Order</button>
             </div>
           </div>
-        ))}
+          ))
+        )}
       </div>
     </div>
   )
