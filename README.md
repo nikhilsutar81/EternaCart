@@ -169,6 +169,13 @@ Deploy the project on Vercel:
 
 ---
 
+# Images Credit:
+- https://www.pexels.com/
+- https://unsplash.com/
+- https://www.freepik.com/
+
+---
+
 # ⚠️ Disclaimer
 
 This project is created for educational and portfolio purposes.
