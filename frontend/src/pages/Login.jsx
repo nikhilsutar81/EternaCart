@@ -5,20 +5,57 @@ import axios from 'axios';
 import { useEffect } from 'react';
 import { toast } from 'react-toastify';
 
+// Password strength validation helper
+const validatePassword = (pwd) => {
+  const requirements = {
+    hasUpperCase: /[A-Z]/.test(pwd),
+    hasLowerCase: /[a-z]/.test(pwd),
+    hasNumbers: /[0-9]/.test(pwd),
+    hasSpecialChar: /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(pwd),
+    isLengthValid: pwd.length >= 8
+  };
+  const isStrong = Object.values(requirements).every(val => val === true);
+  return { requirements, isStrong };
+};
+
+// Name validation - only alphabets and spaces
+const validateName = (name) => {
+  return /^[a-zA-Z\s]+$/.test(name) && name.trim().length > 0;
+};
+
 const Login = () => {
   const [currentState, setCurrentState]= useState('Sign Up');
   const {token, setToken, navigate, backendUrl} = useContext(ShopContext);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [nameError, setNameError] = useState('');
+  const [passwordErrors, setPasswordErrors] = useState({});
+  const [showPasswordRequirements, setShowPasswordRequirements] = useState(false);
   const onSubmitHandler = async (event) => {
     event.preventDefault();
     try{
+      // Validate name for Sign Up
+      if(currentState === 'Sign Up'){
+        if(!validateName(name)){
+          setNameError('Full name must contain only alphabets and spaces');
+          toast.error('Full name must contain only alphabets and spaces');
+          return;
+        }
+        const { isStrong } = validatePassword(password);
+        if(!isStrong){
+          toast.error('Password does not meet the required strength criteria');
+          return;
+        }
+      }
+
       if(currentState === 'Sign Up'){
   const response = await axios.post(`${backendUrl}/api/user/register`, {name, email, password})
         if(response.data.success){
           setToken(response.data.token)
           localStorage.setItem('token', response.data.token)
+          setNameError('');
+          setPasswordErrors({});
         }
         else{
           toast.error(response.data.message)
@@ -40,6 +77,23 @@ const Login = () => {
       toast.error(error.message)
     }
   }
+
+  const handleNameChange = (e) => {
+    const value = e.target.value;
+    setName(value);
+    if(value && !validateName(value)){
+      setNameError('Only alphabets and spaces are allowed');
+    } else {
+      setNameError('');
+    }
+  };
+
+  const handlePasswordChange = (e) => {
+    const value = e.target.value;
+    setPassword(value);
+    const { requirements } = validatePassword(value);
+    setPasswordErrors(requirements);
+  };
   useEffect(()=>{
     if(token){
       navigate('/')
@@ -52,9 +106,59 @@ const Login = () => {
           <p className='prata-regular text-3xl'>{currentState}</p>
           <hr className='border-none h-[1.5px] w-8 bg-gray-800'/>
         </div>
-        {currentState === 'Login' ? '' : <input onChange={(e)=>setName(e.target.value)} value={name} type="text" className='w-full px-3 py-2 border border-gray-800' placeholder='Name' required/>}
-        <input onChange={(e)=>setEmail(e.target.value)} value={email} type="email" className='w-full px-3 py-2 border border-gray-800' placeholder='Email' required/>
-        <input onChange={(e)=>setPassword(e.target.value)} value={password} type="password" className='w-full px-3 py-2 border border-gray-800' placeholder='Password'required/>
+        {currentState === 'Login' ? '' : (
+          <div className='w-full'>
+            <input 
+              onChange={handleNameChange} 
+              value={name} 
+              type="text" 
+              className={`w-full px-3 py-2 border ${nameError ? 'border-red-500' : 'border-gray-800'} rounded`}
+              placeholder='Full Name (alphabets only)' 
+              required
+            />
+            {nameError && <p className='text-red-500 text-xs mt-1'>{nameError}</p>}
+          </div>
+        )}
+        <input 
+          onChange={(e)=>setEmail(e.target.value)} 
+          value={email} 
+          type="email" 
+          className='w-full px-3 py-2 border border-gray-800 rounded' 
+          placeholder='Email' 
+          required
+        />
+        <div className='w-full'>
+          <input 
+            onChange={handlePasswordChange} 
+            value={password} 
+            type="password" 
+            className='w-full px-3 py-2 border border-gray-800 rounded'
+            placeholder='Password'
+            onFocus={() => currentState === 'Sign Up' && setShowPasswordRequirements(true)}
+            onBlur={() => setShowPasswordRequirements(false)}
+            required
+          />
+          {currentState === 'Sign Up' && (showPasswordRequirements || password) && (
+            <div className='mt-3 p-3 bg-gray-50 border border-gray-200 rounded text-xs'>
+              <p className='font-semibold text-gray-700 mb-2'>Password Requirements:</p>
+              <div className='flex items-center gap-2 mb-1'>
+                <span className={passwordErrors.isLengthValid ? '✓ text-green-600' : '✗ text-gray-400'}>At least 8 characters</span>
+              </div>
+              <div className='flex items-center gap-2 mb-1'>
+                <span className={passwordErrors.hasUpperCase ? '✓ text-green-600' : '✗ text-gray-400'}>One uppercase letter (A-Z)</span>
+              </div>
+              <div className='flex items-center gap-2 mb-1'>
+                <span className={passwordErrors.hasLowerCase ? '✓ text-green-600' : '✗ text-gray-400'}>One lowercase letter (a-z)</span>
+              </div>
+              <div className='flex items-center gap-2 mb-1'>
+                <span className={passwordErrors.hasNumbers ? '✓ text-green-600' : '✗ text-gray-400'}>One number (0-9)</span>
+              </div>
+              <div className='flex items-center gap-2'>
+                <span className={passwordErrors.hasSpecialChar ? '✓ text-green-600' : '✗ text-gray-400'}>One special character (!@#$%^&*)</span>
+              </div>
+            </div>
+          )}
+        </div>
         <div className='w-full flex justify-between text-sm mt-[-8px]'>
           <p className='cursor-pointer'>Forgot your password?</p>
           {
