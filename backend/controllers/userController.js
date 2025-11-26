@@ -97,8 +97,8 @@ const getProfile = async (req, res) => {
 // Update user profile
 const updateProfile = async (req, res) => {
     try {
-        const { userId, name, phone, address, photo } = req.body;
-    const updated = await userModel.findByIdAndUpdate(userId, { name, phone, address, photo }, { new: true }).select('-password');
+        const { userId, name, phone, gender, address, photo } = req.body;
+    const updated = await userModel.findByIdAndUpdate(userId, { name, phone, gender, address, photo }, { new: true }).select('-password');
         res.json({ success: true, user: updated });
     } catch (error) {
         console.log(error);
